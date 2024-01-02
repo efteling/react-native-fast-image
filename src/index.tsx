@@ -34,7 +34,18 @@ const priority = {
     high: 'high',
 } as const
 
-export type Transition = 'fade' | 'none'
+export type Transition = {
+    duration?: number
+    effect?:
+        | 'cross-dissolve'
+        | 'flip-from-top'
+        | 'flip-from-right'
+        | 'flip-from-bottom'
+        | 'flip-from-left'
+        | 'curl-up'
+        | 'curl-down'
+        | null
+}
 
 type Cache = 'immutable' | 'web' | 'cacheOnly'
 
@@ -87,7 +98,7 @@ export interface FastImageProps extends AccessibilityProps, ViewProps {
     defaultSource?: ImageRequireSource
     resizeMode?: ResizeMode
     fallback?: boolean
-    transition?: Transition
+    transition?: null | number | Transition
 
     onLoadStart?(): void
 
@@ -156,6 +167,19 @@ const resolveDefaultSource = (
     return defaultSource
 }
 
+const resolveTransition = (
+    transition?: null | number | Transition,
+): Transition | null => {
+    if (typeof transition === 'number') {
+        return {
+            duration: transition,
+            effect: 'cross-dissolve',
+        }
+    }
+
+    return transition ?? null
+}
+
 function FastImageBase({
     source,
     defaultSource,
@@ -167,6 +191,7 @@ function FastImageBase({
     onLoadEnd,
     style,
     fallback,
+    transition,
     children,
     // eslint-disable-next-line no-shadow
     resizeMode = 'cover',
@@ -199,6 +224,8 @@ function FastImageBase({
 
     const resolvedSource = Image.resolveAssetSource(source as any)
     const resolvedDefaultSource = resolveDefaultSource(defaultSource)
+    const resolvedTransition = resolveTransition(transition)
+    console.log('resolvedSource', resolvedTransition)
 
     return (
         <View style={[styles.imageContainer, style]} ref={forwardedRef}>
@@ -214,6 +241,7 @@ function FastImageBase({
                 onFastImageError={onError}
                 onFastImageLoadEnd={onLoadEnd}
                 resizeMode={resizeMode}
+                transition={resolvedTransition}
             />
             {children}
         </View>

@@ -1,5 +1,6 @@
 #import "RCTConvert+FFFastImage.h"
 #import "FFFastImageSource.h"
+#import "FFFastImageTransition.h"
 
 @implementation RCTConvert (FFFastImage)
 
@@ -46,6 +47,18 @@ RCT_ENUM_CONVERTER(FFFCacheControl, (@{
     FFFastImageSource *imageSource = [[FFFastImageSource alloc] initWithURL:uri priority:priority headers:headers cacheControl:cacheControl];
     
     return imageSource;
+}
+
++ (FFFastImageTransition *)FFFastImageTransition:(id)json {
+    if (!json) {
+        return nil;
+    }
+
+    // We receive the duration in milliseconds but NSTimeInterval is in seconds.
+    NSNumber *duration = json[@"duration"];
+    NSString *effect = json[@"effect"] ?: @"cross-dissolve";
+
+    return [[FFFastImageTransition alloc] initWithDuration:([duration doubleValue] / 1000) effect:effect];
 }
 
 RCT_ARRAY_CONVERTER(FFFastImageSource);

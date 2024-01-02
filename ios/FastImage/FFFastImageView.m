@@ -30,6 +30,18 @@
     }
 }
 
+- (void) setTransition: (FFFastImageTransition *)transition {
+    NSLog(@"Setting transition -> %@", transition);
+
+    if (_transition != transition) {
+        _transition = transition;
+
+        if (_transition != nil) {
+            self.sd_imageTransition = transition.sd_webImageTransition;
+        }
+    }
+}
+
 - (void) setOnFastImageLoadEnd: (RCTDirectEventBlock)onFastImageLoadEnd {
     _onFastImageLoadEnd = onFastImageLoadEnd;
     if (self.hasCompleted) {
@@ -73,11 +85,11 @@
 
 - (UIImage*) makeImage: (UIImage*)image withTint: (UIColor*)color {
     UIImage* newImage = [image imageWithRenderingMode: UIImageRenderingModeAlwaysTemplate];
-    UIGraphicsBeginImageContextWithOptions(image.size, NO, newImage.scale);
-    [color set];
-    [newImage drawInRect: CGRectMake(0, 0, image.size.width, newImage.size.height)];
-    newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:image.size];
+    newImage = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+        [color setFill];
+        [newImage drawInRect:CGRectMake(0, 0, image.size.width, newImage.size.height)];
+    }];
     return newImage;
 }
 
@@ -235,6 +247,10 @@
                     }
                 }
             }];
+}
+
+- (void) updateTransition {
+
 }
 
 - (void) dealloc {

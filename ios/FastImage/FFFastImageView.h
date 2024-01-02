@@ -7,6 +7,7 @@
 #import <React/RCTResizeMode.h>
 
 #import "FFFastImageSource.h"
+#import "FFFastImageTransition.h"
 
 @interface FFFastImageView : SDAnimatedImageView
 
@@ -16,6 +17,7 @@
 @property (nonatomic, copy) RCTDirectEventBlock onFastImageLoad;
 @property (nonatomic, copy) RCTDirectEventBlock onFastImageLoadEnd;
 @property (nonatomic, assign) RCTResizeMode resizeMode;
+@property (nonatomic, strong) FFFastImageTransition *transition;
 @property (nonatomic, strong) FFFastImageSource *source;
 @property (nonatomic, strong) UIImage *defaultSource;
 @property (nonatomic, strong) UIColor *imageColor;
