@@ -34,6 +34,8 @@ const priority = {
     high: 'high',
 } as const
 
+export type Transition = 'fade' | 'none'
+
 type Cache = 'immutable' | 'web' | 'cacheOnly'
 
 const cacheControl = {
@@ -85,6 +87,7 @@ export interface FastImageProps extends AccessibilityProps, ViewProps {
     defaultSource?: ImageRequireSource
     resizeMode?: ResizeMode
     fallback?: boolean
+    transition?: Transition
 
     onLoadStart?(): void
 
