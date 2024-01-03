@@ -225,7 +225,6 @@ function FastImageBase({
     const resolvedSource = Image.resolveAssetSource(source as any)
     const resolvedDefaultSource = resolveDefaultSource(defaultSource)
     const resolvedTransition = resolveTransition(transition)
-    console.log('resolvedSource', resolvedTransition)
 
     return (
         <View style={[styles.imageContainer, style]} ref={forwardedRef}>
