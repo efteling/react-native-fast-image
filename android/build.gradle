@@ -12,7 +12,7 @@ buildscript {
             mavenCentral()
         }
         dependencies {
-            classpath 'com.android.tools.build:gradle:3.5.3'
+            classpath 'com.android.tools.build:gradle:3.5.4'
         }
     }
 }
@@ -20,6 +20,7 @@ buildscript {
 apply plugin: 'com.android.library'
 
 android {
+    namespace "com.dylanvann.fastimage"
     compileSdkVersion safeExtGet('compileSdkVersion', 28)
     buildToolsVersion safeExtGet('buildToolsVersion', '28.0.3')
     defaultConfig {
@@ -57,7 +58,7 @@ repositories {
     mavenCentral()
 }
 
-def glideVersion = safeExtGet('glideVersion', '4.12.0')
+def glideVersion = safeExtGet('glideVersion', '4.16.0')
 
 dependencies {
     //noinspection GradleDynamicVersion
