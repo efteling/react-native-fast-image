@@ -1,6 +1,6 @@
 {
     "name": "@efteling/react-native-fast-image",
-    "version": "9.0.3",
+    "version": "9.0.4",
     "description": "FastImage, performant React Native image component.",
     "keywords": [
         "cache",
@@ -65,21 +65,44 @@
     "devDependencies": {
         "@babel/core": "^7.14.6",
         "@babel/runtime": "^7.14.6",
+        "@react-native/babel-preset": "^0.73.21",
+        "@rnx-kit/align-deps": "^2.3.3",
         "@types/jest": "^26.0.24",
         "@types/react": "^17.0.14",
         "@types/react-native": "^0.69.5",
         "@types/react-test-renderer": "^17.0.1",
         "dv-scripts": "^1.6.0",
         "eslint-config-dv-scripts": "^1.1.1",
-        "metro-react-native-babel-preset": "^0.66.1",
+        "metro-react-native-babel-preset": "^0.73.7",
         "prettier": "^2.3.2",
-        "react": "17.0.2",
-        "react-native": "0.64.2",
-        "react-test-renderer": "17.0.2",
-        "typescript": "^4.3.5"
+        "react": "18.2.0",
+        "react-native": "^0.71.0",
+        "react-test-renderer": "18.2.0",
+        "typescript": "5.1.6"
     },
     "peerDependencies": {
-        "react": "^17 || ^18",
-        "react-native": ">=0.60.0"
+        "react": "16.9.0 || 16.11.0 || 16.13.1 || 17.0.1 || 17.0.2 || 18.0.0 || 18.1.0 || 18.2.0",
+        "react-native": "^0.61.5 || ^0.62.3 || ^0.63.2 || ^0.64.2 || ^0.65.0 || ^0.66.0 || ^0.67.0 || ^0.68.0 || ^0.69.0 || ^0.70.0 || ^0.71.0 || ^0.72.0 || ^0.73.0"
+    },
+    "rnx-kit": {
+        "kitType": "library",
+        "alignDeps": {
+            "requirements": {
+                "development": [
+                    "react-native@0.71"
+                ],
+                "production": [
+                    "react-native@>=0.60"
+                ]
+            },
+            "capabilities": [
+                "babel-preset-react-native",
+                "core",
+                "core-android",
+                "core-ios",
+                "react",
+                "react-test-renderer"
+            ]
+        }
     }
 }
