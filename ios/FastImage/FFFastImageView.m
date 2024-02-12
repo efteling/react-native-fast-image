@@ -31,8 +31,6 @@
 }
 
 - (void) setTransition: (FFFastImageTransition *)transition {
-    NSLog(@"Setting transition -> %@", transition);
-
     if (_transition != transition) {
         _transition = transition;
 
