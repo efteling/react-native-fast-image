@@ -47,7 +47,7 @@ public class FastImageRequestListener implements RequestListener<Drawable> {
         int surfaceId = UIManagerHelper.getSurfaceId(view);
 
         if (dispatcher != null) {
-            dispatcher.dispatchEvent(new FastImageErrorEvent(surfaceId, view.getId()));
+            dispatcher.dispatchEvent(new FastImageErrorEvent(surfaceId, view.getId(), null));
             dispatcher.dispatchEvent(new FastImageLoadEndEvent(surfaceId, view.getId()));
         }
 
@@ -66,7 +66,10 @@ public class FastImageRequestListener implements RequestListener<Drawable> {
         int surfaceId = UIManagerHelper.getSurfaceId(view);
 
         if (dispatcher != null) {
-            dispatcher.dispatchEvent(new FastImageLoadEvent(surfaceId, view.getId()));
+            int width = resource.getIntrinsicWidth();
+            int height = resource.getIntrinsicHeight();
+
+            dispatcher.dispatchEvent(new FastImageLoadEvent(surfaceId, view.getId(), width, height));
             dispatcher.dispatchEvent(new FastImageLoadEndEvent(surfaceId, view.getId()));
         }
 
