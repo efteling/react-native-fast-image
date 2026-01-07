@@ -1,6 +1,6 @@
 {
     "name": "@efteling/react-native-fast-image",
-    "version": "9.1.0-beta",
+    "version": "9.1.0-beta2",
     "description": "FastImage, performant React Native image component.",
     "keywords": [
         "cache",
